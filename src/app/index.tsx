@@ -1,98 +1,140 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button } from "@react-navigation/elements";
+import { useRouter } from "expo-router";
+import React, { useState, useRef } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  FlatList,
+  ImageBackground,
+  useWindowDimensions,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  Pressable
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
+const onboardingData = [
+  {
+    id: '1',
+    image: require("@/assets/images/onboarding1.jpg")
+  },
+  {
+    id: '2',
+    image: require("@/assets/images/onboarding2.jpg")
+  },
+  {
+    id: '3',
+    image: require("@/assets/images/onboarding3.jpg")
   }
-  if (Device.isDevice) {
+];
+
+// Defining type for the onboarding data correctly
+type OnboardingItem = typeof onboardingData[0];
+
+export default function Index() {
+  const insets = useSafeAreaInsets();
+  // Getting width and height of the screen
+  const { width, height } = useWindowDimensions();
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  
+  const router = useRouter();
+  const flatListRef = useRef<FlatList<OnboardingItem>>(null);
+
+  // Rendering the onboarding item
+  const renderItem = ({ item }: { item: OnboardingItem }) => {
     return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
+      <View style={{ width, height }}>
+        {/* item.image now refers to the pre-bundled asset pointer */}
+        <Image source={item.image} style={styles.backgroundImageHome} />
+      </View>
     );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+  };
+
+  // Tracks which page is currently centered on swipe
+  const updateCurrentSlideIndex = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const contentOffsetX = e.nativeEvent.contentOffset.x;
+    const currentIndex = Math.round(contentOffsetX / width);
+    setCurrentSlideIndex(currentIndex);
+  };
+
+  // On press of the next button 
+  const onPressNext = () => {
+    if (currentSlideIndex < onboardingData.length - 1) {
+      flatListRef.current?.scrollToIndex({ index: currentSlideIndex + 1 });
+    } else {
+      router.push("/(auth)");
+    }
+  };
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <View style={[styles.container, { paddingBottom: insets.bottom }]}>
+      <View style={styles.background}>
+        <FlatList
+          ref={flatListRef}
+          data={onboardingData}
+          renderItem={renderItem}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onMomentumScrollEnd={updateCurrentSlideIndex}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      
+      <View style={[styles.ButtonView, { bottom: 60 + insets.bottom }]}>
+        <Pressable 
+          onPress={onPressNext} 
+          style={styles.NextButton}
+        >
+          <Text style={styles.buttonText}>
+            {currentSlideIndex === onboardingData.length - 1 ? "Get Started" : "Next Page"}
+          </Text>
+        </Pressable>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#000', // Keeps background crisp while sliding images
   },
-  safeArea: {
+  background: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  backgroundImageHome: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover"
   },
-  title: {
-    textAlign: 'center',
+  ButtonView: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  code: {
-    textTransform: 'uppercase',
+  NextButton: {
+    backgroundColor: "rgba(207, 181, 181, 0.4)", 
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 25,
+    width: 200,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)"
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: "600"
+  }
 });
