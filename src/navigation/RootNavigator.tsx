@@ -1,9 +1,10 @@
-import React from 'react';
+// navigation/RootNavigator.tsx
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import OnboardingScreen from '../screens/OnboardingScreen';
+import React from 'react';
 import AuthScreen from '../screens/AuthScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
-import HomeScreen from '../screens/HomeScreen';
+import OnboardingScreen from '../screens/OnboardingScreen';
+import DrawerNavigator from './drawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,8 @@ const RootNavigator = () => {
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="Auth" component={AuthScreen} />
       <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
+      {/* Replaced HomeScreen with DrawerNavigator */}
+      <Stack.Screen name="Home" component={DrawerNavigator} /> 
     </Stack.Navigator>
   );
 };
