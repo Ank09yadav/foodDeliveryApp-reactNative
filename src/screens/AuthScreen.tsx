@@ -1,35 +1,31 @@
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Platform, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const AuthPage = () => {
-    const router = useRouter();
+const AuthScreen = () => {
+    const navigation = useNavigation<any>();
     const { width } = useWindowDimensions();
 
-    // States
     const [email, setEmail] = useState("ank@ank.com");
     const [password, setPassword] = useState("ank12345");
-    const [name, setName] = useState(""); // Needed only for Sign Up
+    const [name, setName] = useState("");
     const [isSignUp, setSignUp] = useState(false);
 
     const handleAuthAction = () => {
-        // 1. Basic empty fields validation check
         if (!email || !password || (isSignUp && !name)) {
             alert("Please fill in all details");
             return;
         }
 
         if (isSignUp) {
-
             console.log("Registering User:", { name, email, password });
             alert("Registration Successful! Please switch to login mode.");
             setSignUp(false);
         } else {
-
             if (email.trim() === "ank@ank.com" && password === "ank12345") {
                 console.log("Login successful! Navigating to dashboard...");
-                router.replace("/(home)");
+                navigation.replace("Home");
             } else {
                 alert("Invalid Credentials! Please enter correct details.");
             }
@@ -37,8 +33,6 @@ const AuthPage = () => {
     };
     return (
         <SafeAreaView style={styles.container}>
-
-            {/* Header / Welcome Container */}
             <View style={styles.welcomeContainer}>
                 <Text style={styles.title}>
                     {isSignUp ? "Hurry Up! Food getting cold! 🍕" : "Welcome Back! 👋"}
@@ -48,7 +42,6 @@ const AuthPage = () => {
                 </Text>
             </View>
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                {/* Form Container */}
                 <View style={[styles.formContainer, { width: width * 0.9 }]}>
                     {isSignUp && (
                         <View style={styles.inputWrapper}>
@@ -89,25 +82,21 @@ const AuthPage = () => {
                         />
                     </View>
 
-
-                    {/* Forgot Password Link (Only shows on Login state) */}
                     {!isSignUp && (
                         <TouchableOpacity
-                            onPress={() => router.push("/(auth)/forgot-password")}
+                            onPress={() => navigation.navigate("ForgotPassword")}
                             style={styles.forgotPasswordContainer}
                         >
                             <Text style={styles.forgotText}>Forgot Password?</Text>
                         </TouchableOpacity>
                     )}
 
-                    {/* Primary Action Button */}
                     <TouchableOpacity style={styles.primaryButton} onPress={handleAuthAction}>
                         <Text style={styles.primaryButtonText}>
                             {isSignUp ? "Create Account" : "Sign In"}
                         </Text>
                     </TouchableOpacity>
 
-                    {/* Toggle Link */}
                     <View style={styles.toggleContainer}>
                         <Text style={styles.toggleText}>
                             {isSignUp ? "Already have an account? " : "New to the app? "}
@@ -125,12 +114,12 @@ const AuthPage = () => {
     );
 };
 
-export default AuthPage;
+export default AuthScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF8F5', // Soft Warm Cream Ivory background
+        backgroundColor: '#FFF8F5',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -185,7 +174,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     forgotText: {
-        color: '#FF4500', // Signature Delivery Zomato/Swiggy Orange
+        color: '#FF4500',
         fontWeight: '600',
         fontSize: 14,
     },

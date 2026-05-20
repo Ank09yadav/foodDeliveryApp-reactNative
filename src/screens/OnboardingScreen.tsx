@@ -1,5 +1,3 @@
-import { Button } from "@react-navigation/elements";
-import { useRouter } from "expo-router";
 import React, { useState, useRef } from "react";
 import {
   StyleSheet,
@@ -7,14 +5,13 @@ import {
   Text,
   Image,
   FlatList,
-  ImageBackground,
   useWindowDimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
   Pressable
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+import { useNavigation } from "@react-navigation/native";
 
 const onboardingData = [
   {
@@ -31,41 +28,35 @@ const onboardingData = [
   }
 ];
 
-// Defining type for the onboarding data correctly
 type OnboardingItem = typeof onboardingData[0];
 
-export default function Index() {
+export default function OnboardingScreen() {
   const insets = useSafeAreaInsets();
-  // Getting width and height of the screen
   const { width, height } = useWindowDimensions();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   
-  const router = useRouter();
+  const navigation = useNavigation<any>();
   const flatListRef = useRef<FlatList<OnboardingItem>>(null);
 
-  // Rendering the onboarding item
   const renderItem = ({ item }: { item: OnboardingItem }) => {
     return (
       <View style={{ width, height }}>
-        {/* item.image now refers to the pre-bundled asset pointer */}
         <Image source={item.image} style={styles.backgroundImageHome} />
       </View>
     );
   };
 
-  // Tracks which page is currently centered on swipe
   const updateCurrentSlideIndex = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
   };
 
-  // On press of the next button 
   const onPressNext = () => {
     if (currentSlideIndex < onboardingData.length - 1) {
       flatListRef.current?.scrollToIndex({ index: currentSlideIndex + 1 });
     } else {
-      router.push("/(auth)");
+      navigation.replace("Auth");
     }
   };
 
@@ -84,7 +75,6 @@ export default function Index() {
         />
       </View>
 
-      
       <View style={[styles.ButtonView, { bottom: 60 + insets.bottom }]}>
         <Pressable 
           onPress={onPressNext} 
@@ -102,7 +92,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000', // Keeps background crisp while sliding images
+    backgroundColor: '#000',
   },
   background: {
     flex: 1,

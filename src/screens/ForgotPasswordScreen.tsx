@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useState } from 'react'
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ForgotPasswordPage = () => {
-    const router = useRouter();
+const ForgotPasswordScreen = () => {
+    const navigation = useNavigation();
     const { width } = useWindowDimensions();
     const [email, setEmail] = useState("");
 
@@ -16,14 +16,12 @@ const ForgotPasswordPage = () => {
         console.log("Sending OTP code/link to:", email);
         alert(`Password reset code has been successfully sent to ${email}`);
         
-        // Go back to login screen smoothly
-        router.back();
+        navigation.goBack();
     };
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* Back Button Header */}
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                 <Text style={styles.backButtonText}>⬅ Back to Login</Text>
             </TouchableOpacity>
 
@@ -56,7 +54,7 @@ const ForgotPasswordPage = () => {
     );
 };
 
-export default ForgotPasswordPage;
+export default ForgotPasswordScreen;
 
 const styles = StyleSheet.create({
     container: {
