@@ -6,17 +6,27 @@ import OrdersScreen from '../screens/OrdersScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false, // Hidden because the Drawer will provide the header
         tabBarActiveTintColor: '#FF4500',
         tabBarInactiveTintColor: '#666',
-        tabBarStyle: { paddingBottom: 5, height: 60 },
+        tabBarStyle: { 
+          height: 60 + insets.bottom,
+          paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
+          paddingTop: 8,
+          backgroundColor: '#ffffff',
+          borderTopWidth: 1,
+          borderTopColor: '#f0f0f0',
+        },
         tabBarIcon: ({ color, size }) => {
           let iconName: any;
 

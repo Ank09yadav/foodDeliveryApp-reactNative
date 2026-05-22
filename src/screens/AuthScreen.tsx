@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Platform, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../provider/authProvider';
 
@@ -86,29 +86,29 @@ const AuthScreen = () => {
                     </View>
 
                     {!isSignUp && (
-                        <TouchableOpacity
+                        <Pressable
                             onPress={() => navigation.navigate("ForgotPassword")}
                             style={styles.forgotPasswordContainer}
                         >
                             <Text style={styles.forgotText}>Forgot Password?</Text>
-                        </TouchableOpacity>
+                        </Pressable>
                     )}
 
-                    <TouchableOpacity style={styles.primaryButton} onPress={handleAuthAction}>
+                    <Pressable style={styles.primaryButton} onPress={handleAuthAction}>
                         <Text style={styles.primaryButtonText}>
                             {isSignUp ? "Create Account" : "Sign In"}
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
 
                     <View style={styles.toggleContainer}>
                         <Text style={styles.toggleText}>
                             {isSignUp ? "Already have an account? " : "New to the app? "}
                         </Text>
-                        <TouchableOpacity onPress={() => setSignUp(!isSignUp)}>
+                        <Pressable onPress={() => setSignUp(!isSignUp)}>
                             <Text style={styles.toggleLink}>
                                 {isSignUp ? "Login" : "Register here"}
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
 
                 </View>

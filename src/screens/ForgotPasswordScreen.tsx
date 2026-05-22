@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ForgotPasswordScreen = () => {
@@ -15,15 +15,15 @@ const ForgotPasswordScreen = () => {
         }
         console.log("Sending OTP code/link to:", email);
         alert(`Password reset code has been successfully sent to ${email}`);
-        
+
         navigation.goBack();
     };
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
                 <Text style={styles.backButtonText}>⬅ Back to Login</Text>
-            </TouchableOpacity>
+            </Pressable>
 
             <View style={styles.welcomeContainer}>
                 <Text style={styles.title}>Reset Password 🔑</Text>
@@ -46,9 +46,9 @@ const ForgotPasswordScreen = () => {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.primaryButton} onPress={handleResetInstructions}>
+                <Pressable style={styles.primaryButton} onPress={handleResetInstructions}>
                     <Text style={styles.primaryButtonText}>Send Reset Link</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </SafeAreaView>
     );
