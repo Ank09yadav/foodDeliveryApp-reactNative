@@ -2,17 +2,19 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Platform, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '../provider/authProvider';
 
 const AuthScreen = () => {
     const navigation = useNavigation<any>();
     const { width } = useWindowDimensions();
+    const { login } = useAuth();
 
     const [email, setEmail] = useState("ank@ank.com");
-    const [password, setPassword] = useState("ank12345");
+    const [password, setPassword] = useState("ank@ank.com");
     const [name, setName] = useState("");
     const [isSignUp, setSignUp] = useState(false);
 
-    const handleAuthAction = () => {
+    const handleAuthAction = async () => {
         if (!email || !password || (isSignUp && !name)) {
             alert("Please fill in all details");
             return;
@@ -23,14 +25,15 @@ const AuthScreen = () => {
             alert("Registration Successful! Please switch to login mode.");
             setSignUp(false);
         } else {
-            if (email.trim() === "ank@ank.com" && password === "ank12345") {
+            const success = await login(email, password);
+            if (success) {
                 console.log("Login successful! Navigating to dashboard...");
-                navigation.replace("Home");
             } else {
                 alert("Invalid Credentials! Please enter correct details.");
             }
         }
     };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.welcomeContainer}>

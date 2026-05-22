@@ -1,12 +1,27 @@
 // navigation/DrawerNavigator.tsx
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeTabNavigator from './HomePageNavigation';
+import { useAuth } from '../provider/authProvider';
 
 const Drawer = createDrawerNavigator();
 
 const SettingsScreen = () => <View style={styles.center}><Text>Settings Screen ⚙️</Text></View>;
+
+const LogoutScreen = () => {
+  const { Logout } = useAuth();
+
+  useEffect(() => {
+    Logout();
+  }, [Logout]);
+
+  return (
+    <View style={styles.center}>
+      <Text>Logging out...</Text>
+    </View>
+  );
+};
 
 const DrawerNavigator = () => {
   return (
@@ -35,9 +50,9 @@ const DrawerNavigator = () => {
         name="Help & Support"
         component={SettingsScreen}
         />
-         <Drawer.Screen
+      <Drawer.Screen
         name="Log Out"
-        component={SettingsScreen}
+        component={LogoutScreen}
         />
 
     </Drawer.Navigator>
@@ -48,4 +63,4 @@ export default DrawerNavigator;
 
 const styles = StyleSheet.create({
   center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' },
-});
+});
