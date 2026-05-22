@@ -5,6 +5,7 @@ interface OrderContextType {
     pastOrders: PastOrder[];
     activeOrder: any;
     addOrder: (restaurantName: string, items: string, price: string, emoji: string) => void;
+    sessionOrdersCount: number;
 }
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined);
@@ -12,6 +13,7 @@ const OrderContext = createContext<OrderContextType | undefined>(undefined);
 export const OrderProvider = ({ children }: { children: React.ReactNode }) => {
     const [pastOrders, setPastOrders] = useState<PastOrder[]>(initialPastOrders);
     const [activeOrder, setActiveOrder] = useState<any>(initialActiveOrder);
+    const [sessionOrdersCount, setSessionOrdersCount] = useState(0);
 
     const addOrder = (restaurantName: string, items: string, price: string, emoji: string) => {
         const newOrder: PastOrder = {
@@ -24,10 +26,11 @@ export const OrderProvider = ({ children }: { children: React.ReactNode }) => {
             emoji,
         };
         setPastOrders([newOrder, ...pastOrders]);
+        setSessionOrdersCount(prev => prev + 1);
     };
 
     return (
-        <OrderContext.Provider value={{ pastOrders, activeOrder, addOrder }}>
+        <OrderContext.Provider value={{ pastOrders, activeOrder, addOrder, sessionOrdersCount }}>
             {children}
         </OrderContext.Provider>
     );

@@ -7,11 +7,13 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useOrders } from '../provider/orderProvider';
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
   const insets = useSafeAreaInsets();
+  const { sessionOrdersCount } = useOrders();
 
   return (
     <Tab.Navigator
@@ -48,7 +50,14 @@ const HomeTabNavigator = () => {
     >
       <Tab.Screen options={{ title: 'Home' }} name="MainHome" component={HomeScreen} />
       <Tab.Screen options={{ title: 'Search' }} name="Search" component={SearchScreen} />
-      <Tab.Screen options={{ title: 'Orders' }} name="Orders" component={OrdersScreen} />
+      <Tab.Screen 
+        options={{ 
+          title: 'Orders', 
+          tabBarBadge: sessionOrdersCount > 0 ? sessionOrdersCount : undefined 
+        }} 
+        name="Orders" 
+        component={OrdersScreen} 
+      />
       <Tab.Screen options={{ title: 'Profile' }} name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );

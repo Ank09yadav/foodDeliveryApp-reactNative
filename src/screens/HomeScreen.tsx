@@ -1,8 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import { categories, popularRestaurants, popularDishes, Restaurant, FoodItem } from '../constants/contants';
+import { categories, FoodItem, popularDishes, popularRestaurants, Restaurant, User } from '../constants/contants';
 
 const HomeScreen = () => {
     const navigation = useNavigation<any>();
@@ -28,8 +28,8 @@ const HomeScreen = () => {
     );
 
     const renderTrendingDish = (dish: FoodItem) => (
-        <Pressable 
-            key={dish.id} 
+        <Pressable
+            key={dish.id}
             style={styles.dishCard}
             onPress={() => navigation.navigate('Order', { item: dish })}
         >
@@ -60,7 +60,7 @@ const HomeScreen = () => {
                         <Text style={styles.deliveringLabel}>Delivering to</Text>
                         <View style={styles.locationContainer}>
                             <Text style={styles.locationPin}>📍</Text>
-                            <Text style={styles.locationText}>Home - 123 Foodie Street</Text>
+                            <Text style={styles.locationText}>{User[0].address}</Text>
                         </View>
                     </View>
                     <View style={styles.notificationWrapper}>

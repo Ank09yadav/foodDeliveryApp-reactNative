@@ -6,7 +6,7 @@ import AuthScreen from '../screens/AuthScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import DrawerNavigator from './drawerNavigation';
-
+//@ts-ignore
 import Order from '../screens/Order';
 
 const Stack = createNativeStackNavigator();

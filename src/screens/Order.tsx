@@ -17,7 +17,7 @@ const Order = () => {
         id: '99',
         name: 'Delicious Food Item',
         category: 'Food 🍔',
-        price: '$9.99',
+        price: '₹9.99',
         rating: '4.7 ⭐',
         image: '🍔'
     };
@@ -25,8 +25,8 @@ const Order = () => {
     const [quantity, setQuantity] = useState(1);
 
     // Dynamic price math
-    const priceString = item.price || '$0.00';
-    const numericPrice = parseFloat(priceString.replace('$', '')) || 0;
+    const priceString = item.price || '₹0.00';
+    const numericPrice = parseFloat(priceString.replace('₹', '')) || 0;
     const subtotal = numericPrice * quantity;
     const deliveryFee = 2.00;
     const serviceFee = 1.50;
@@ -37,7 +37,7 @@ const Order = () => {
 
     const handlePlaceOrder = () => {
         const itemsDescription = `${quantity}x ${item.name}`;
-        const totalCostString = `$${grandTotal.toFixed(2)}`;
+        const totalCostString = `₹${grandTotal.toFixed(2)}`;
 
         // Construct a stylized restaurant name based on category
         const categoryName = item.category ? item.category.split(' ')[0] : 'Food';
@@ -126,22 +126,22 @@ const Order = () => {
                     <View style={styles.receiptCard}>
                         <View style={styles.receiptRow}>
                             <Text style={styles.receiptLabel}>Item Subtotal ({quantity}x)</Text>
-                            <Text style={styles.receiptValue}>${subtotal.toFixed(2)}</Text>
+                            <Text style={styles.receiptValue}>₹{subtotal.toFixed(2)}</Text>
                         </View>
                         <View style={styles.receiptRow}>
                             <Text style={styles.receiptLabel}>Delivery Fee</Text>
-                            <Text style={styles.receiptValue}>${deliveryFee.toFixed(2)}</Text>
+                            <Text style={styles.receiptValue}>₹{deliveryFee.toFixed(2)}</Text>
                         </View>
                         <View style={styles.receiptRow}>
                             <Text style={styles.receiptLabel}>Taxes & Fees</Text>
-                            <Text style={styles.receiptValue}>${serviceFee.toFixed(2)}</Text>
+                            <Text style={styles.receiptValue}>₹{serviceFee.toFixed(2)}</Text>
                         </View>
 
                         <View style={styles.divider} />
 
                         <View style={[styles.receiptRow, styles.totalRow]}>
                             <Text style={styles.totalLabel}>Grand Total</Text>
-                            <Text style={styles.totalValue}>${grandTotal.toFixed(2)}</Text>
+                            <Text style={styles.totalValue}>₹{grandTotal.toFixed(2)}</Text>
                         </View>
                     </View>
                 </View>
@@ -151,7 +151,7 @@ const Order = () => {
             <View style={[styles.actionPanel, { paddingBottom: insets.bottom > 0 ? insets.bottom + 12 : 20 }]}>
                 <View style={styles.priceContainer}>
                     <Text style={styles.priceLabel}>TOTAL AMOUNT</Text>
-                    <Text style={styles.priceText}>${grandTotal.toFixed(2)}</Text>
+                    <Text style={styles.priceText}>₹{grandTotal.toFixed(2)}</Text>
                 </View>
                 <Pressable
                     style={styles.placeOrderButton}

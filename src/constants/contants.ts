@@ -48,20 +48,20 @@ export const categories = [
 ];
 
 export const popularRestaurants: Restaurant[] = [
-    { id: '1', name: 'Burger Palace', cuisine: 'Fast Food, Burgers', rating: '4.7 ⭐', deliveryTime: '15-20 min', minOrder: '$10 min', emoji: '🍔' },
-    { id: '2', name: 'Pizza Express', cuisine: 'Italian, Pizza', rating: '4.8 ⭐', deliveryTime: '20-30 min', minOrder: '$12 min', emoji: '🍕' },
-    { id: '3', name: 'Sushi Master', cuisine: 'Asian, Japanese', rating: '4.9 ⭐', deliveryTime: '25-35 min', minOrder: '$15 min', emoji: '🍣' },
-    { id: '4', name: 'Sweet Tooth', cuisine: 'Cakes, Patisserie', rating: '4.6 ⭐', deliveryTime: '10-15 min', minOrder: '$5 min', emoji: '🍰' },
+    { id: '1', name: 'Burger Palace', cuisine: 'Fast Food, Burgers', rating: '4.7 ⭐', deliveryTime: '15-20 min', minOrder: '₹100 min', emoji: '🍔' },
+    { id: '2', name: 'Pizza Express', cuisine: 'Italian, Pizza', rating: '4.8 ⭐', deliveryTime: '20-30 min', minOrder: '₹120 min', emoji: '🍕' },
+    { id: '3', name: 'Sushi Master', cuisine: 'Asian, Japanese', rating: '4.9 ⭐', deliveryTime: '25-35 min', minOrder: '₹150 min', emoji: '🍣' },
+    { id: '4', name: 'Sweet Tooth', cuisine: 'Cakes, Patisserie', rating: '4.6 ⭐', deliveryTime: '10-15 min', minOrder: '₹50 min', emoji: '🍰' },
 ];
 
 
 export const popularDishes: FoodItem[] = [
-    { id: '1', name: 'Pepperoni Supreme', category: 'Pizza 🍕', price: '$12.99', rating: '4.8 ⭐', image: '🍕' },
-    { id: '2', name: 'Double Cheese Burger', category: 'Burgers 🍔', price: '$8.49', rating: '4.7 ⭐', image: '🍔' },
-    { id: '3', name: 'Crunchy Salmon Roll', category: 'Sushi 🍣', price: '$14.99', rating: '4.9 ⭐', image: '🍣' },
-    { id: '4', name: 'Red Velvet Slice', category: 'Desserts 🍰', price: '$5.99', rating: '4.6 ⭐', image: '🍰' },
-    { id: '5', name: 'Berry Blast Smoothie', category: 'Drinks 🥤', price: '$4.99', rating: '4.5 ⭐', image: '🥤' },
-    { id: '6', name: 'Classic Margherita', category: 'Pizza 🍕', price: '$10.99', rating: '4.7 ⭐', image: '🍕' },
+    { id: '1', name: 'Pepperoni Supreme', category: 'Pizza 🍕', price: '₹250', rating: '4.8 ⭐', image: '🍕' },
+    { id: '2', name: 'Double Cheese Burger', category: 'Burgers 🍔', price: '₹150', rating: '4.7 ⭐', image: '🍔' },
+    { id: '3', name: 'Crunchy Salmon Roll', category: 'Sushi 🍣', price: '₹300', rating: '4.9 ⭐', image: '🍣' },
+    { id: '4', name: 'Red Velvet Slice', category: 'Desserts 🍰', price: '₹100', rating: '4.6 ⭐', image: '🍰' },
+    { id: '5', name: 'Berry Blast Smoothie', category: 'Drinks 🥤', price: '₹100', rating: '4.5 ⭐', image: '🥤' },
+    { id: '6', name: 'Classic Margherita', category: 'Pizza 🍕', price: '₹200', rating: '4.7 ⭐', image: '🍕' },
 ];
 
 // Order Screen 
@@ -83,8 +83,8 @@ export const activeOrder = {
 };
 
 export const pastOrders: PastOrder[] = [
-    { id: '1', restaurantName: 'Pizza Express 🍕', items: '2x Large Pepperoni Supreme', date: 'May 20, 2026', price: '$25.98', status: 'Delivered', emoji: '🍕' },
-    { id: '2', restaurantName: 'Sushi Master 🍣', items: '1x Crunchy Salmon Roll, 1x Miso Soup', date: 'May 18, 2026', price: '$18.49', status: 'Delivered', emoji: '🍣' },
-    { id: '3', restaurantName: 'Sweet Tooth 🍰', items: '1x Chocolate Fudge Slice, 1x Latte', date: 'May 14, 2026', price: '$9.98', status: 'Delivered', emoji: '🍰' },
-    { id: '4', restaurantName: 'Noodle House 🍜', items: '1x Spicy Beef Ramen', date: 'May 10, 2026', price: '$13.99', status: 'Delivered', emoji: '🍜' },
+    { id: '1', restaurantName: 'Pizza Express 🍕', items: '2x Large Pepperoni Supreme', date: 'May 20, 2026', price: '₹500', status: 'Delivered', emoji: '🍕' },
+    { id: '2', restaurantName: 'Sushi Master 🍣', items: '1x Crunchy Salmon Roll, 1x Miso Soup', date: 'May 18, 2026', price: '₹350', status: 'Delivered', emoji: '🍣' },
+    { id: '3', restaurantName: 'Sweet Tooth 🍰', items: '1x Chocolate Fudge Slice, 1x Latte', date: 'May 14, 2026', price: '₹180', status: 'Delivered', emoji: '🍰' },
+    { id: '4', restaurantName: 'Noodle House 🍜', items: '1x Spicy Beef Ramen', date: 'May 10, 2026', price: '₹240', status: 'Delivered', emoji: '🍜' },
 ];
