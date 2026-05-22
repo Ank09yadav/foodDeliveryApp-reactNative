@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { FlatList, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 import { FoodItem, popularDishes } from '../constants/contants';
+
 const SearchScreen = () => {
+    const navigation = useNavigation<any>();
     const [searchQuery, setSearchQuery] = useState('');
 
     const categories = ['All', 'Pizza 🍕', 'Burgers 🍔', 'Sushi 🍣', 'Desserts 🍰', 'Drinks 🥤'];
     const [selectedCategory, setSelectedCategory] = useState('All');
-
-
 
     const filteredDishes = popularDishes.filter(dish => {
         const matchesSearch = dish.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -17,7 +18,10 @@ const SearchScreen = () => {
     });
 
     const renderDishItem = ({ item }: { item: FoodItem }) => (
-        <View style={styles.dishCard}>
+        <Pressable 
+            style={styles.dishCard}
+            onPress={() => navigation.navigate('Order', { item })}
+        >
             <View style={styles.dishImageWrapper}>
                 <Text style={styles.dishEmoji}>{item.image}</Text>
             </View>
@@ -29,10 +33,13 @@ const SearchScreen = () => {
                     <Text style={styles.dishRating}>{item.rating}</Text>
                 </View>
             </View>
-            <Pressable style={styles.addButton}>
+            <Pressable 
+                style={styles.addButton}
+                onPress={() => navigation.navigate('Order', { item })}
+            >
                 <Text style={styles.addButtonText}>+</Text>
             </Pressable>
-        </View>
+        </Pressable>
     );
 
     return (

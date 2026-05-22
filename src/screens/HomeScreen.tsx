@@ -1,9 +1,12 @@
 import React from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { categories, popularRestaurants, Restaurant } from '../constants/contants';
+import { useNavigation } from '@react-navigation/native';
+import { categories, popularRestaurants, popularDishes, Restaurant, FoodItem } from '../constants/contants';
 
 const HomeScreen = () => {
+    const navigation = useNavigation<any>();
+
     const renderRestaurantCard = ({ item }: { item: Restaurant }) => (
         <Pressable style={styles.restaurantCard}>
             <View style={styles.cardImageWrapper}>
@@ -19,6 +22,29 @@ const HomeScreen = () => {
                     <Text style={styles.footerText}>⏱️ {item.deliveryTime}</Text>
                     <Text style={styles.footerText}>•</Text>
                     <Text style={styles.footerText}>💳 {item.minOrder}</Text>
+                </View>
+            </View>
+        </Pressable>
+    );
+
+    const renderTrendingDish = (dish: FoodItem) => (
+        <Pressable 
+            key={dish.id} 
+            style={styles.dishCard}
+            onPress={() => navigation.navigate('Order', { item: dish })}
+        >
+            <View style={styles.dishImageWrapper}>
+                <Text style={styles.dishEmoji}>{dish.image}</Text>
+            </View>
+            <Text style={styles.dishName} numberOfLines={1}>{dish.name}</Text>
+            <View style={styles.dishHeader}>
+                <Text style={styles.dishRating}>{dish.rating}</Text>
+                <Text style={styles.dishCategory}>{dish.category.split(' ')[0]}</Text>
+            </View>
+            <View style={styles.dishFooter}>
+                <Text style={styles.dishPrice}>{dish.price}</Text>
+                <View style={styles.addBtn}>
+                    <Text style={styles.addBtnText}>+</Text>
                 </View>
             </View>
         </Pressable>
@@ -67,6 +93,19 @@ const HomeScreen = () => {
                                 <Text style={styles.categoryText}>{cat.name}</Text>
                             </Pressable>
                         ))}
+                    </ScrollView>
+                </View>
+
+                {/* Popular Dishes */}
+                <View style={styles.sectionHeaderContainer}>
+                    <Text style={styles.sectionTitle}>Trending Dishes</Text>
+                    <Pressable onPress={() => navigation.navigate('Search')}>
+                        <Text style={styles.seeAllText}>See All</Text>
+                    </Pressable>
+                </View>
+                <View style={styles.dishesContainer}>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.dishesList}>
+                        {popularDishes.map((dish) => renderTrendingDish(dish))}
                     </ScrollView>
                 </View>
 
@@ -235,6 +274,82 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         paddingHorizontal: 20,
+    },
+    dishesContainer: {
+        marginBottom: 25,
+    },
+    dishesList: {
+        paddingHorizontal: 12,
+    },
+    dishCard: {
+        backgroundColor: '#FFF',
+        borderRadius: 20,
+        padding: 12,
+        marginHorizontal: 6,
+        width: 140,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.03,
+        shadowRadius: 8,
+        elevation: 2,
+    },
+    dishImageWrapper: {
+        width: '100%',
+        height: 80,
+        backgroundColor: '#FFF1EB',
+        borderRadius: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+    },
+    dishEmoji: {
+        fontSize: 40,
+    },
+    dishName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#222',
+        marginBottom: 4,
+    },
+    dishHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    dishRating: {
+        fontSize: 11,
+        fontWeight: '600',
+        color: '#444',
+    },
+    dishCategory: {
+        fontSize: 10,
+        color: '#999',
+        fontWeight: '500',
+    },
+    dishFooter: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    dishPrice: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#FF4500',
+    },
+    addBtn: {
+        backgroundColor: '#FF4500',
+        width: 24,
+        height: 24,
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    addBtnText: {
+        color: '#FFF',
+        fontSize: 14,
+        fontWeight: 'bold',
+        lineHeight: 14,
     },
     restaurantCard: {
         backgroundColor: '#FFF',

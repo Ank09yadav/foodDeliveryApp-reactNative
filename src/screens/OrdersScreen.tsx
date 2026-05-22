@@ -3,12 +3,12 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useNavigation } from '@react-navigation/native';
-import { PastOrder, activeOrder, pastOrders } from '../constants/contants';
-
+import { PastOrder } from '../constants/contants';
+import { useOrders } from '../provider/orderProvider';
 
 const OrdersScreen = () => {
-
-    const navigation = useNavigation();
+    const { pastOrders, activeOrder } = useOrders();
+    const navigation = useNavigation<any>();
     const renderPastOrder = ({ item }: { item: PastOrder }) => (
         <View style={styles.pastOrderCard}>
             <View style={styles.pastOrderHeader}>

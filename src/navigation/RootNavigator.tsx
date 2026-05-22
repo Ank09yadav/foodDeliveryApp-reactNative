@@ -7,6 +7,8 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import DrawerNavigator from './drawerNavigation';
 
+import Order from '../screens/Order';
+
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
@@ -15,7 +17,10 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isLoggedIn ? (
-        <Stack.Screen name="Home" component={DrawerNavigator} />
+        <>
+          <Stack.Screen name="Home" component={DrawerNavigator} />
+          <Stack.Screen name="Order" component={Order} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />

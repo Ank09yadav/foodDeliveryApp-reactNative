@@ -2,7 +2,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import React, { useEffect } from 'react';
-import { Image, Pressable, StyleSheet, Text, ToastAndroid, View } from 'react-native';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useAuth } from '../provider/authProvider';
 import HomeTabNavigator from './HomePageNavigation';
 const Drawer = createDrawerNavigator();
@@ -34,7 +34,7 @@ const CustomDrawerContent = (props: any) => {
     {
       name: 'My Orders',
       icon: 'calendar-text-outline',
-      onPress: () => props.navigation.navigate('OrderScreen'),
+      onPress: () => props.navigation.navigate('HomeTabs', { screen: 'Orders' }),
     },
     {
       name: 'Settings',
@@ -44,7 +44,7 @@ const CustomDrawerContent = (props: any) => {
     {
       name: 'Help',
       icon: 'help-circle-outline',
-      onPress: () => ToastAndroid.show('ankur.appdev@gmail.com', ToastAndroid.LONG),
+      onPress: () => Alert.alert('Help & Support', 'Feel free to contact support at: ankur.appdev@gmail.com'),
     },
   ];
 
