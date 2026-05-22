@@ -2,11 +2,13 @@ import React from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useNavigation } from '@react-navigation/native';
 import { PastOrder, activeOrder, pastOrders } from '../constants/contants';
+
 
 const OrdersScreen = () => {
 
-
+    const navigation = useNavigation();
     const renderPastOrder = ({ item }: { item: PastOrder }) => (
         <View style={styles.pastOrderCard}>
             <View style={styles.pastOrderHeader}>
@@ -44,37 +46,41 @@ const OrdersScreen = () => {
             </View>
 
             {/* Scrollable list containing Active Order Header + Past Orders */}
-            <FlatList
-                data={pastOrders}
-                keyExtractor={(item) => item.id}
-                renderItem={renderPastOrder}
-                contentContainerStyle={styles.listContainer}
-                showsVerticalScrollIndicator={false}
-                ListHeaderComponent={
-                    activeOrder && (
-                        <View style={styles.activeOrderContainer}>
-                            <Text style={styles.sectionTitle}>Active Order</Text>
-                            <View style={styles.activeOrderCard}>
-                                <View style={styles.activeOrderHeader}>
-                                    <Text style={styles.activeRestaurant}>{activeOrder.restaurantName}</Text>
-                                    <Text style={styles.activeEta}>ETA: {activeOrder.eta}</Text>
+            <Pressable
+            // onPress={() => navigation.navigate('Order')}
+            >
+                <FlatList
+                    data={pastOrders}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderPastOrder}
+                    contentContainerStyle={styles.listContainer}
+                    showsVerticalScrollIndicator={false}
+                    ListHeaderComponent={
+                        activeOrder && (
+                            <View style={styles.activeOrderContainer}>
+                                <Text style={styles.sectionTitle}>Active Order</Text>
+                                <View style={styles.activeOrderCard}>
+                                    <View style={styles.activeOrderHeader}>
+                                        <Text style={styles.activeRestaurant}>{activeOrder.restaurantName}</Text>
+                                        <Text style={styles.activeEta}>ETA: {activeOrder.eta}</Text>
+                                    </View>
+                                    <Text style={styles.activeItems} numberOfLines={2}>
+                                        {activeOrder.items}
+                                    </Text>
+                                    <View style={styles.statusRow}>
+                                        <Text style={styles.statusText}>Status: {activeOrder.status}</Text>
+                                    </View>
+                                    {/* Progress Bar */}
+                                    <View style={styles.progressBarBg}>
+                                        <View style={[styles.progressBarFill, { width: `${activeOrder.progress * 100}%` }]} />
+                                    </View>
                                 </View>
-                                <Text style={styles.activeItems} numberOfLines={2}>
-                                    {activeOrder.items}
-                                </Text>
-                                <View style={styles.statusRow}>
-                                    <Text style={styles.statusText}>Status: {activeOrder.status}</Text>
-                                </View>
-                                {/* Progress Bar */}
-                                <View style={styles.progressBarBg}>
-                                    <View style={[styles.progressBarFill, { width: `${activeOrder.progress * 100}%` }]} />
-                                </View>
+                                <Text style={styles.sectionTitle}>Past Orders</Text>
                             </View>
-                            <Text style={styles.sectionTitle}>Past Orders</Text>
-                        </View>
-                    )
-                }
-            />
+                        )
+                    }
+                />
+            </Pressable>
         </SafeAreaView>
     );
 };

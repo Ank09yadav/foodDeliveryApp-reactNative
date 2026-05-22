@@ -1,11 +1,11 @@
 // navigation/RootNavigator.tsx
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { useAuth } from '../provider/authProvider';
 import AuthScreen from '../screens/AuthScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import DrawerNavigator from './drawerNavigation';
-import { useAuth } from '../provider/authProvider';
 
 const Stack = createNativeStackNavigator();
 
