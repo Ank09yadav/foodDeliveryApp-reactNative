@@ -3,7 +3,7 @@ export const User = [
     {
         id: 1,
         name: "Ankur Yadav",
-        profileImageUrl: 'https://www.pexels.com/photo/a-serval-sitting-on-the-ground-25956283/',
+        profileImageUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200',
         email: "ank@ank.com",
         address: "123 main street, Lucknow",
         phone: '9876543210',

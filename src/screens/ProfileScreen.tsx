@@ -1,7 +1,7 @@
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ProfileOptionProps } from '../constants/contants';
+import { ProfileOptionProps, User } from '../constants/contants';
 import { useAuth } from '../provider/authProvider';
 
 
@@ -31,10 +31,13 @@ const ProfileScreen = () => {
                 {/* Profile Header */}
                 <View style={styles.profileHeader}>
                     <View style={styles.avatarGradient}>
-                        <Text style={styles.avatarText}>AY</Text>
+                        <Image
+                            source={{ uri: User[0].profileImageUrl }}
+                            style={styles.avatar}
+                        />
                     </View>
-                    <Text style={styles.userName}>Ankur Yadav</Text>
-                    <Text style={styles.userEmail}>ank@ank.com</Text>
+                    <Text style={styles.userName}>{User[0].name}</Text>
+                    <Text style={styles.userEmail}>{User[0].email}</Text>
                     <Pressable style={styles.editProfileButton}>
                         <Text style={styles.editProfileText}>Edit Profile</Text>
                     </Pressable>
@@ -101,6 +104,14 @@ const styles = StyleSheet.create({
         shadowRadius: 16,
         elevation: 3,
         marginBottom: 20,
+    },
+    avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 37.5,
+        borderWidth: 3,
+        borderColor: '#ffffff',
+        marginBottom: 12,
     },
     avatarGradient: {
         width: 90,

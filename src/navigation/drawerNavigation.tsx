@@ -1,4 +1,5 @@
 // navigation/DrawerNavigator.tsx
+import { User } from '@/constants/contants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import React, { useEffect } from 'react';
@@ -53,11 +54,11 @@ const CustomDrawerContent = (props: any) => {
       {/* Profile Header with a beautiful vibrant orange-red background */}
       <View style={styles.headerSection}>
         <Image
-          source={{ uri: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200' }}
+          source={{ uri: User[0].profileImageUrl }}
           style={styles.avatar}
         />
-        <Text style={styles.userName}>Ankur Yadav</Text>
-        <Text style={styles.userEmail}>ank@ank.com</Text>
+        <Text style={styles.userName}>{User[0].name}</Text>
+        <Text style={styles.userEmail}>{User[0].email}</Text>
       </View>
 
       {/* Menu List */}
