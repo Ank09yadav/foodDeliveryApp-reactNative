@@ -103,6 +103,19 @@ Once the Expo console starts up in your terminal, you can direct it using the ke
 - **Run on Web Browser**: Press `w` in the terminal prompt.
 
 ---
+### ScrenShots 
+<img width="720" height="1600" alt="ss-1 (2)" src="https://github.com/user-attachments/assets/844cee89-ca9d-4fb6-9d46-e8bf9490d569" />
+<img width="720" height="1600" alt="ss-1 (3)" src="https://github.com/user-attachments/assets/158f0f34-00e6-4fd6-9e46-22e7d71400ae" />
+<img width="720" height="1600" alt="ss-1 (4)" src="https://github.com/user-attachments/assets/83a2719c-7545-40ea-85da-b0ff0497584c" />
+<img width="720" height="1600" alt="ss-1 (5)" src="https://github.com/user-attachments/assets/0a31d30f-335d-41e6-8c4b-8b7102008a35" />
+<img width="720" height="1600" alt="ss-1 (6)" src="https://github.com/user-attachments/assets/5dd922b8-9222-44be-827b-70ed61fc0f90" />
+<img width="720" height="1600" alt="ss-1 (7)" src="https://github.com/user-attachments/assets/7c1c9de3-3adf-4628-8046-235164cd9998" />
+<img width="720" height="1600" alt="ss-1 (8)" src="https://github.com/user-attachments/assets/a5da090b-ba96-4317-b380-82a8b8295f28" />
+<img width="720" height="1600" alt="ss-1 (9)" src="https://github.com/user-attachments/assets/f8f8b39e-12ba-446a-bf34-be283e1c97d0" />
+<img width="720" height="1600" alt="ss-1 (10)" src="https://github.com/user-attachments/assets/247282ac-8aaf-4a76-89a4-90ceb66c4358" />
+<img width="720" height="1600" alt="ss-1 (11)" src="https://github.com/user-attachments/assets/08343a27-5f81-4385-9bc3-6e7368c7b43e" />
+<img width="720" height="1600" alt="ss-1 (1)" src="https://github.com/user-attachments/assets/878882b9-5cec-44a3-8f85-5e0d62fbb431" />
+
 
 ## 👤 Contacts & Social Channels
 
