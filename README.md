@@ -1,5 +1,6 @@
 # Assignment : chaiCode mobile Dev cohort
-
+## video DEMO  👇
+[youtubeShort](https://www.youtube.com/shorts/fk7S3XHeztM) 
 Welcome to the **Food Delivery App** — a premium, high-fidelity React Native application built with **Expo**, **React Navigation (v7)**, and **TypeScript**. 
 
 Designed to deliver a state-of-the-art mobile experience, this app features smooth navigation flows, a warm and modern visual design language (utilizing vibrant coral-orange gradients and clean drop-shadow micro-cards), dynamic order management using global Context APIs, and solid cross-platform safety.
